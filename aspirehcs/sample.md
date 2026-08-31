@@ -88,6 +88,11 @@ The VMs gate on real readiness: the agented VMs wait for the DHCP lease reported
 hcsguest, the appliance for its fixed address answering its health check. `web` waits
 for all of them.
 
+![All seven resources running](../assets/sample/resources.png)
+
+Each VM row shows two URLs: the guest's leased address and a `localhost` port on the
+host. The [Connect commands page](connect.html) explains the second one.
+
 ## What to look at
 
 - Edit `data\hello.txt` while it runs — the container serves the change on the next
@@ -97,3 +102,7 @@ for all of them.
 - Connect (SSH) on **appliance** and **vendor**, Connect (RDP) on **winserver**.
 - With ConsumeWeb on, the container and Linux VM receive `WEB_URL` — in the VM it lands
   in `/etc/aspire.env`.
+
+![The web frontend: container card, seeded Postgres rows, VM probes](../assets/sample/web.png)
+
+![worker details: guest stats, endpoints, references](../assets/sample/worker-details.png)

@@ -55,6 +55,8 @@ appliances with a fixed in-guest address use `WithGuestAddress` instead.
 
 - [Running the sample](aspirehcs/sample.html) — the full showcase: container, Postgres,
   three kinds of VM, and guests consuming endpoints back
+- [Connect commands](aspirehcs/connect.html) — Connect (SSH)/(RDP)/(Shell), and when
+  they ride hvsocket instead of the guest's address
 
 ## More details
 
