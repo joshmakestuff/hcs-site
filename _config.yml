@@ -1,0 +1,14 @@
+title: hcsctl & AspireHcs
+description: A CLI over the Windows Host Compute Service, and an Aspire integration that drives it.
+theme: minima
+
+# Project site URL: https://joshmakestuff.github.io/hcs-site
+url: "https://joshmakestuff.github.io"
+baseurl: "/hcs-site"
+
+header_pages:
+  - hcsctl.md
+  - aspirehcs.md
+
+# minima settings
+show_excerpts: false
