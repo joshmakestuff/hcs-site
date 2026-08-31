@@ -20,6 +20,17 @@ dashboard:
 Both kinds consume as well as serve: `WithReference(other)` delivers connection strings
 and endpoints into the guest.
 
+```csharp
+var vm = builder.AddHcsVm("appliance")
+    .WithVhdx(@"d:\images\appliance.vhdx")
+    .WithMemory(gigabytes: 4)
+    .WithNetwork()
+    .WithEndpoint(name: "api", targetPort: 8080)
+    .WithTcpHealthCheck();
+
+builder.AddProject<Projects.Api>("api").WithReference(vm).WaitFor(vm);
+```
+
 All HCS access goes through hcsctl's `--json` contract; this package contains no HCS
 interop of its own.
 
@@ -30,11 +41,20 @@ VM image (a bootable Gen2/UEFI VHDX); AspireHcs does not install operating syste
 Container images come from a registry through `hcsctl image pull` and an elevated
 `hcsctl image import`.
 
+VM images need the [hcsguest agent](hcsctl/guest-agent.html): readiness, endpoint
+addresses, and environment delivery into the guest all ride on it. Agentless
+appliances with a fixed in-guest address use `WithGuestAddress` instead.
+
 - **Consumer documentation** — the builder API, requirements, and setup:
   [src/AspireHcs/README.md](https://github.com/joshmakestuff/AspireHcs/blob/main/src/AspireHcs/README.md)
 - **Sample** — a Linux VM, a Windows VM and a Windows container in one AppHost, with
   image preparation steps:
   [samples/HcsSample.AppHost](https://github.com/joshmakestuff/AspireHcs/blob/main/samples/HcsSample.AppHost/README.md)
+
+## Guides
+
+- [Running the sample](aspirehcs/sample.html) — the full showcase: container, Postgres,
+  three kinds of VM, and guests consuming endpoints back
 
 ## More details
 

@@ -40,6 +40,13 @@ hcsctl info
 
 `hcsctl help` is the command inventory. `hcsctl info` reports what the host supports.
 
+## Guides
+
+- [Containers](hcsctl/containers.html) — images, isolation modes, the container lifecycle
+- [Virtual machines](hcsctl/vms.html) — booting a VHDX, the guest agent
+- [Guest agent](hcsctl/guest-agent.html) — what hcsguest enables and how to install it
+- [Networks](hcsctl/networks.html) — inspecting, creating and using host compute networks
+
 ## More details
 
 - [docs/usage.md](https://github.com/joshmakestuff/hcsctl/blob/main/docs/usage.md) —
