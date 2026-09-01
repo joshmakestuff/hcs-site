@@ -20,8 +20,10 @@ Every command has a `--json` form with a fixed document shape and exit codes.
 
 ## Getting set up
 
-**Requirements:** Windows with the Hyper-V feature enabled. Most operations need an
-elevated (Administrator) shell.
+**Requirements:** Windows with the Hyper-V feature enabled, and membership of the
+Hyper-V Administrators group. VM and Hyper-V-isolated container commands run
+unelevated; image import and the other elevated commands are listed on the
+[home page](index.html) and in `hcsctl help`.
 
 Download `hcsctl.exe` from the
 [latest release](https://github.com/joshmakestuff/hcsctl/releases), or build from

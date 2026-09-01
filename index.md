@@ -9,6 +9,24 @@ Two projects for running Hyper-V virtual machines and Windows containers through
 [Host Compute Service (HCS)](https://learn.microsoft.com/virtualization/api/hcs/overview),
 the API underneath Docker on Windows and Windows Sandbox.
 
+## Before you start
+
+Both projects run on **Windows with the Hyper-V feature enabled** (Windows 10 1809 /
+Windows Server 2019 or later). Nothing escalates on its own; what your token holds
+decides what runs:
+
+- **Join the Hyper-V Administrators group.** VMs and Hyper-V-isolated containers then run
+  from an ordinary, unelevated shell — including the whole AspireHcs dev loop. Membership
+  takes effect after signing out and back in.
+- **Elevate once per image.** `hcsctl image import` (and `export`, `rm`, `layer mount`,
+  every `storage` command, process-isolated containers) need an Administrator shell.
+- **Bring your own VM image.** A bootable Gen2/UEFI VHDX with the
+  [hcsguest agent](hcsctl/guest-agent.html) installed; neither project installs
+  operating systems.
+
+`hcsctl info` reports what the current token can run; `hcsctl help` marks the commands
+that need elevation.
+
 ## Why
 
 Windows ships a capable virtualization API, but there is no first-class command-line
