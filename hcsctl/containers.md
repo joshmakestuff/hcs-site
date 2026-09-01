@@ -6,7 +6,7 @@ permalink: /hcsctl/containers.html
 
 # Running containers
 
-hcsctl runs Windows containers straight against HCS — no daemon. Images come from a
+hcsctl runs Windows containers directly against HCS, without a daemon. Images come from a
 registry into a local store, then containers run from that store.
 
 ## Images
@@ -37,8 +37,8 @@ hcsctl container run --ref mcr.microsoft.com/windows/servercore:ltsc2022 \
 
 ## Lifecycle
 
-`--cmd` at create records the primary process; `start` launches it and stays attached
-as its pump, writing its output to `primary.log`:
+`--cmd` at create records the primary process; `start` launches it, stays attached, and
+writes its output to `primary.log`:
 
 ```
 hcsctl container create --ref mcr.microsoft.com/windows/servercore:ltsc2022 \
@@ -50,16 +50,16 @@ From a second shell:
 
 ```
 hcsctl container exec --id web --cmd "cmd /c ver"
-hcsctl container exec --id web --cmd cmd --interactive --tty   # a real shell
+hcsctl container exec --id web --cmd cmd --interactive --tty   # interactive shell
 hcsctl container logs --id web --follow
 hcsctl container stop --id web
 hcsctl container rm   --id web
 ```
 
-Without `--cmd`, `start` just boots the container and returns; `logs` has nothing to
-report, but `exec` works the same.
+Without `--cmd`, `start` boots the container and returns; `logs` has no output, and
+`exec` works as above.
 
-Also: `ls`, `ps`, `stats`, `inspect`, `pause`/`resume`, `kill`. Networking — attaching
+Other commands: `ls`, `ps`, `stats`, `inspect`, `pause`/`resume`, `kill`. Networking — attaching
 to a network and publishing ports — is on the [networks page](networks.html).
 
 ## More details

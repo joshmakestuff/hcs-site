@@ -20,7 +20,7 @@ six resources:
 - **vendor** — an agentless appliance VM: no guest agent, a fixed in-guest address,
   optional data disk, pinned MAC and VLAN.
 
-Plus **ConsumeWeb**: the container and the Linux VM consume `web`'s endpoint back —
+Plus **ConsumeWeb**: the container and the Linux VM also consume `web`'s endpoint —
 delivered into the container through a Docker relay, and into the VM over hvsocket.
 
 ## Prerequisites
@@ -72,7 +72,7 @@ switches on:
 }
 ```
 
-Each VM section is independent — omit one and its resource simply doesn't exist.
+Each VM section is independent — omit one and its resource is not created.
 `ApplianceAddress` is required with `ApplianceVhdx`; the data disk, MAC and VLAN are
 themselves optional. VHDX files are booted as copy-on-write children, so the originals
 are never written and can back several runs at once.
@@ -84,8 +84,9 @@ cd samples\HcsSample.AppHost
 aspire run
 ```
 
-The VMs gate on real readiness: the agented VMs wait for the DHCP lease reported by
-hcsguest, the appliance for its fixed address answering its health check. `web` waits
+A VM is Running only once it is reachable: the agented VMs wait for the DHCP lease
+reported by hcsguest, the agentless appliance for its fixed address to answer its
+health check. `web` waits
 for all of them.
 
 ![All seven resources running](../assets/sample/resources.png)
@@ -93,15 +94,15 @@ for all of them.
 Each VM row shows two URLs: the guest's leased address and a `localhost` port on the
 host. The [Connect commands page](connect.html) explains the second one.
 
-## What to look at
+## Things to try
 
 - Edit `data\hello.txt` while it runs — the container serves the change on the next
   refresh, live over VSMB.
 - Pause and resume **worker** from the dashboard; its details show guest stats and
   processes. Connect (Shell) opens a cmd.exe inside it.
 - Connect (SSH) on **appliance** and **vendor**, Connect (RDP) on **winserver**.
-- With ConsumeWeb on, the container and Linux VM receive `WEB_URL` — in the VM it lands
-  in `/etc/aspire.env`.
+- With ConsumeWeb on, the container and Linux VM receive `WEB_URL` — in the VM it is
+  written to `/etc/aspire.env`.
 
 ![The web frontend: container card, seeded Postgres rows, VM probes](../assets/sample/web.png)
 

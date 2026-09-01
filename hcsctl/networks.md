@@ -9,7 +9,7 @@ permalink: /hcsctl/networks.html
 hcsctl works with [host compute networks (HCN)](https://learn.microsoft.com/virtualization/api/hcn/overview) —
 the same networks Docker on Windows and WSL use. Containers and VMs attach to one by
 name with `--network`. Every Windows client SKU with Hyper-V already has the Default
-Switch, so you can attach without creating anything.
+Switch, so attaching needs no setup.
 
 ## Inspecting
 
@@ -23,7 +23,7 @@ hcsctl network inspect --name my-nat       # the effective HCN document
 
 ## Creating
 
-Two forms — an explicit NAT network or an isolated private one:
+Two types, NAT and private:
 
 ```
 hcsctl network create --name my-nat --type nat --subnet 172.30.0.0/24 --gateway 172.30.0.1
@@ -50,7 +50,7 @@ hcsctl container create --ref mcr.microsoft.com/windows/servercore:ltsc2022 \
 hcsctl network rm --name my-nat
 ```
 
-Only removes an empty network; it refuses to remove its endpoints.
+Fails if the network still has endpoints.
 
 ## More details
 

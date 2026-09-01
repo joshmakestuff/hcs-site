@@ -6,14 +6,14 @@ permalink: /hcsctl/guest-agent.html
 
 # The guest agent
 
-`hcsguest` runs inside a VM as a service and talks to the host over a Hyper-V socket —
-no NIC, no DHCP lease, no host elevation. It ships with hcsctl releases; host and guest
+`hcsguest` runs inside a VM as a service and communicates with the host over a Hyper-V
+socket. It needs no NIC, DHCP lease, or host elevation. It ships with hcsctl releases; host and guest
 share a wire protocol, so pin the guest to the host's release tag.
 
 ## What it enables
 
 ```
-hcsctl guest info    --vmid <guid>                 # what the guest says about itself
+hcsctl guest info    --vmid <guid>                 # agent and guest details
 hcsctl guest exec    --vmid <guid> --cmd "..."     # run a command in the guest
 hcsctl guest forward --vmid <guid> --port 22       # publish a guest TCP port on the host
 hcsctl vm ip         --id <guid>                   # guest-reported addresses
@@ -42,7 +42,7 @@ Linux, as root (systemd):
 curl -fsSL https://raw.githubusercontent.com/joshmakestuff/hcsctl/v0.7.0/install/install-hcsguest.sh | sh -s -- -v v0.7.0
 ```
 
-The scripts verify checksums before touching anything and are safe to rerun for repair
+The scripts verify checksums before installing and are safe to rerun for repair
 or upgrade. Air-gapped guests: copy the release artifact in and pass `-Path` / `-p`.
 The Hyper-V socket transport must be present — in-box on Windows, `hv_sock` on stock
 Linux kernels.
@@ -52,8 +52,8 @@ Linux kernels.
 ```
 hcsctl vm create --vhdx <path> --network default   # prints the VM id
 hcsctl vm start  --id <id>
-hcsctl guest info --vmid <id>                      # must answer: the agent is up
-hcsctl vm ip     --id <id>                         # must print an address: DHCP works
+hcsctl guest info --vmid <id>                      # succeeds only if the agent is running
+hcsctl vm ip     --id <id>                         # prints the leased address
 hcsctl vm rm     --id <id> --force
 ```
 

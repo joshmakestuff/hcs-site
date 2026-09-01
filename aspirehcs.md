@@ -17,8 +17,8 @@ dashboard:
 - **Hyper-V-isolated Windows containers** — run images from an
   [hcsctl](hcsctl.html) store.
 
-Both kinds consume as well as serve: `WithReference(other)` delivers connection strings
-and endpoints into the guest.
+Both resource types can also consume references: `WithReference(other)` delivers
+connection strings and endpoints into the guest.
 
 ```csharp
 var vm = builder.AddHcsVm("appliance")
@@ -42,7 +42,7 @@ Container images come from a registry through `hcsctl image pull` and an elevate
 `hcsctl image import`.
 
 VM images need the [hcsguest agent](hcsctl/guest-agent.html): readiness, endpoint
-addresses, and environment delivery into the guest all ride on it. Agentless
+addresses, and environment delivery into the guest all depend on it. Agentless
 appliances with a fixed in-guest address use `WithGuestAddress` instead.
 
 - **Consumer documentation** — the builder API, requirements, and setup:
@@ -53,10 +53,10 @@ appliances with a fixed in-guest address use `WithGuestAddress` instead.
 
 ## Guides
 
-- [Running the sample](aspirehcs/sample.html) — the full showcase: container, Postgres,
-  three kinds of VM, and guests consuming endpoints back
+- [Running the sample](aspirehcs/sample.html) — container, Postgres, three kinds of VM, and
+  guests consuming endpoints
 - [Connect commands](aspirehcs/connect.html) — Connect (SSH)/(RDP)/(Shell), and when
-  they ride hvsocket instead of the guest's address
+  they use an hvsocket forward instead of the guest's address
 
 ## More details
 
