@@ -31,8 +31,8 @@ that need elevation.
 
 Windows ships a capable virtualization API, but no first-class command-line surface
 over it. Docker covers containers only and brings its own daemon; Hyper-V Manager and
-the PowerShell cmdlets cover VMs only and go through VMMS. HCS does both without a
-management service.
+the PowerShell cmdlets cover VMs only and go through VMMS. HCS does both, without
+VMMS or a container daemon.
 
 - **[hcsctl](hcsctl.html)** is that command-line surface: images, layers, containers,
   VMs, networks and a guest agent as shell commands. Every command has a `--json` form
