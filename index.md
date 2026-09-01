@@ -19,8 +19,7 @@ depends on the token:
   from an ordinary, unelevated shell — including the whole AspireHcs dev loop. Membership
   takes effect after signing out and back in.
 - **Import images from an Administrator shell.** `hcsctl image import` is elevated, once
-  per image. The other elevated commands are `image export|rm`, `layer mount|unmount`,
-  `storage *`, `cim mount|unmount`, and creating process-isolated containers.
+  per image. The full per-command list is on the [elevation page](hcsctl/elevation.html).
 - **Supply a VM image.** A bootable Gen2/UEFI VHDX with the
   [hcsguest agent](hcsctl/guest-agent.html) installed; neither project installs
   operating systems.
