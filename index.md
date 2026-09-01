@@ -20,7 +20,7 @@ depends on the token:
   takes effect after signing out and back in.
 - **Import images from an Administrator shell.** `hcsctl image import` is elevated, once
   per image. The full per-command list is on the [elevation page](hcsctl/elevation.html).
-- **Supply a VM image.** A bootable Gen2/UEFI VHDX with the
+- **Supply a VM image.** A bootable Gen2/UEFI VHDX with, or without, the
   [hcsguest agent](hcsctl/guest-agent.html) installed; neither project installs
   operating systems.
 
